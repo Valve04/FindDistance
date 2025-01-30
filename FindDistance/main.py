@@ -8,8 +8,8 @@ import folium
 st.title("Find Distance Point")
 
 
-def test2(x1,x2,y1,y2):
-    G_drive = ox.graph_from_point((x1,x2), dist=50000, network_type="drive_service") # ดาวน์โหลดเครือข่ายถนนในรัศมีที่ใหญ่ขึ้นเพื่อให้ครอบคลุมทั้งจุดเริ่มต้นและปลายทาง
+def Calculate(x1,x2,y1,y2):
+    G_drive = ox.graph_from_point((x1,x2), dist=30000, network_type="drive_service") # ดาวน์โหลดเครือข่ายถนนในรัศมีที่ใหญ่ขึ้นเพื่อให้ครอบคลุมทั้งจุดเริ่มต้นและปลายทาง
     orig_node = ox.distance.nearest_nodes(G_drive, x2, x1)
     dest_node = ox.distance.nearest_nodes(G_drive, y2 ,y1)
     route = nx.shortest_path(G_drive, orig_node, dest_node, weight="length")
@@ -34,13 +34,13 @@ def test2(x1,x2,y1,y2):
 
 
 
-def test():
+def Input():
     Point1 = st.text_input("Enter a origin:", placeholder="(Latitude, Longitude)", key="Point1")
     Point2 = st.text_input("Enter a destination:", placeholder="(Latitude, Longitude)")
     submit_button = st.button("Submit")
 
     if submit_button:
-        # try:
+        try:
             st.write("Point1:", Point1)
             st.write("Point2:", Point2)
             lat_1, long_1 = Point1.strip('()').split(', ')
@@ -51,10 +51,10 @@ def test():
             long_2 = float(long_2)
             # st.write(lat_1, long_1)
             # st.write(lat_2, long_2)
-            test2(lat_1,long_1,lat_2,long_2)
+            Calculate(lat_1,long_1,lat_2,long_2)
 
-        # except:
-        #     st.write("Invalid input")
+        except:
+            st.write("Invalid input")
 
 
 
@@ -66,4 +66,4 @@ def test():
         # dest_node = ox.distance.nearest_nodes(G_drive, Point2[1], Point2[0])
 
 if __name__ == "__main__":
-    test()
+    Input()
