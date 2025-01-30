@@ -9,7 +9,7 @@ st.title("Find Distance Point")
 
 
 def Calculate(x1,x2,y1,y2):
-    G_drive = ox.graph_from_point((x1,x2), dist=30000, network_type="drive_service") # ดาวน์โหลดเครือข่ายถนนในรัศมีที่ใหญ่ขึ้นเพื่อให้ครอบคลุมทั้งจุดเริ่มต้นและปลายทาง
+    G_drive = ox.graph_from_point((x1,x2), dist=10000, network_type="drive_service") # ดาวน์โหลดเครือข่ายถนนในรัศมีที่ใหญ่ขึ้นเพื่อให้ครอบคลุมทั้งจุดเริ่มต้นและปลายทาง
     orig_node = ox.distance.nearest_nodes(G_drive, x2, x1)
     dest_node = ox.distance.nearest_nodes(G_drive, y2 ,y1)
     route = nx.shortest_path(G_drive, orig_node, dest_node, weight="length")
